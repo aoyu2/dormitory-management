@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nuo.repairService.mapper.TbHousemasterMapper">
+
+    <resultMap id="BaseResultMap" type="com.nuo.repairService.entity.TbHousemaster">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="phone" column="phone" jdbcType="BIGINT"/>
+            <result property="headImg" column="head_img" jdbcType="VARCHAR"/>
+            <result property="buildingNo" column="building_no" jdbcType="VARCHAR"/>
+            <result property="gmtCreate" column="gmt_create" jdbcType="TIMESTAMP"/>
+            <result property="gmtModified" column="gmt_modified" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,name,phone,
+        head_img,building_no,gmt_create,
+        gmt_modified
+    </sql>
+</mapper>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nuo.manageService.mapper.RepairWorkerMapper">
+
+    <resultMap id="BaseResultMap" type="com.nuo.manageService.entity.RepairWorker">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="workerId" column="worker_id" jdbcType="VARCHAR"/>
+            <result property="phone" column="phone" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,name,worker_id,
+        phone
+    </sql>
+
+    <update id="saveRepairInfo">
+        <foreach collection="distributionRepairs" item="distributionRepair" separator=";">
+            UPDATE repair_worker SET current_repair_count = #{distributionRepair.repairCount} WHERE id = #{distributionRepair.workerId}
+        </foreach>
+    </update>
+
+    <select id="getNameById" resultType="java.lang.String">
+        SELECT `name` FROM repair_worker WHERE id = #{id}
+    </select>
+    <select id="getDistributionRepairWork" resultType="com.nuo.manageService.entity.custom.DistributionRepair">
+        SELECT id AS workerId, current_repair_count AS repairCount FROM repair_worker GROUP BY id
+    </select>
+</mapper>

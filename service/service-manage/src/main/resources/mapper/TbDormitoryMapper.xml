@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nuo.manageService.mapper.TbDormitoryMapper">
+
+    <resultMap id="BaseResultMap" type="com.nuo.manageService.entity.TbDormitory">
+        <id property="id" column="id" jdbcType="CHAR"/>
+        <result property="dormitoryNo" column="dormitory_no" jdbcType="VARCHAR"/>
+        <result property="buildingNo" column="building_no" jdbcType="VARCHAR"/>
+        <result property="gmtCreate" column="gmt_create" jdbcType="TIMESTAMP"/>
+        <result property="gmtModified" column="gmt_modified" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id
+        ,dormitory_no,building_no,
+        gmt_create,gmt_modified
+    </sql>
+    <select id="getDormitoryVos" resultType="com.nuo.manageService.entity.vo.DormitoryVo">
+        SELECT dor.`id`, dor.`dormitory_no` AS dormitoryNo, COUNT(stu.`id`) AS personCount
+        FROM tb_dormitory AS dor
+                 LEFT JOIN tb_student AS stu
+                           ON stu.`building_no` = #{buildingNo} AND dor.`building_no` = #{buildingNo} AND
+                              stu.`dormitory_no` = dor.`dormitory_no`
+        GROUP BY dor.`dormitory_no`, dor.`building_no`
+        HAVING dor.`building_no` = #{buildingNo}
+        ORDER BY dormitoryNo ASC LIMIT #{current}, #{size}
+    </select>
+
+    <select id="getDormitoryVo" resultType="com.nuo.manageService.entity.vo.DormitoryVo">
+        SELECT dor.`id`, dor.`dormitory_no` AS dormitoryNo, COUNT(stu.`id`) AS personCount
+        FROM tb_dormitory AS dor
+                 LEFT JOIN tb_student AS stu
+                           ON stu.`building_no` = #{buildingNo} AND dor.`building_no` = #{buildingNo} AND
+                              stu.`dormitory_no` = dor.`dormitory_no`
+        GROUP BY dor.`dormitory_no`
+        HAVING dor.`dormitory_no` = #{dormitoryNo}
+    </select>
+    <select id="getTotal" resultType="java.lang.Long">
+        SELECT COUNT(stu.`id`)
+        FROM tb_dormitory AS dor
+                 LEFT JOIN tb_student AS stu
+                           ON stu.`building_no` = #{buildingNo} AND dor.`building_no` = #{buildingNo} AND
+                              stu.`dormitory_no` = dor.`dormitory_no`
+    </select>
+</mapper>

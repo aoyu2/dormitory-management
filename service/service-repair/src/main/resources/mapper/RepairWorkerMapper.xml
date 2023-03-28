@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nuo.repairService.mapper.RepairWorkerMapper">
+
+    <resultMap id="BaseResultMap" type="com.nuo.repairService.entity.RepairWorker">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="workerId" column="worker_id" jdbcType="VARCHAR"/>
+            <result property="password" column="password" jdbcType="VARCHAR"/>
+            <result property="phone" column="phone" jdbcType="BIGINT"/>
+            <result property="currentRepairCount" column="current_repair_count" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,name,worker_id,
+        password,phone,current_repair_count
+    </sql>
+    <update id="reduceCountOfRepair">
+        UPDATE repair_worker SET current_repair_count = current_repair_count - 1 WHERE id = #{workerId}
+    </update>
+    <select id="getCurrentRepairOfCount" resultType="java.util.Map">
+        SELECT current_repair_count as currentRepairCount FROM repair_worker WHERE id = #{workerId}
+    </select>
+
+</mapper>

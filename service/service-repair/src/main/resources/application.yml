@@ -1,0 +1,29 @@
+server:
+  port: 6001
+
+spring:
+  application:
+    # 服务名
+    name: service-repair
+  profiles:
+    # 环境设置：dev、test、prod
+    active: dev
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  # mysql数据库连接
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/bishe?serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+
+#mybatis日志
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+#设置日志级别
+#logging:
+#  level:
+#    root: DEBUG

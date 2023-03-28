@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nuo.repairService.mapper.SecondProjectMapper">
+
+    <resultMap id="BaseResultMap" type="com.nuo.repairService.entity.SecondProject">
+            <id property="id" column="id" jdbcType="CHAR"/>
+            <result property="secondProject" column="second_project" jdbcType="VARCHAR"/>
+            <result property="firstId" column="first_id" jdbcType="CHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,second_project,first_id
+    </sql>
+</mapper>

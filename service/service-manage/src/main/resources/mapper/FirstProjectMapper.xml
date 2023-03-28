@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nuo.manageService.mapper.FirstProjectMapper">
+
+    <resultMap id="BaseResultMap" type="com.nuo.manageService.entity.FirstProject">
+            <id property="id" column="id" jdbcType="CHAR"/>
+            <result property="firstProject" column="first_project" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,first_project
+    </sql>
+</mapper>

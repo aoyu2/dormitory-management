@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nuo.repairService.mapper.TbRepairMapper">
+
+    <resultMap id="BaseResultMap" type="com.nuo.repairService.entity.TbRepair">
+            <id property="id" column="id" jdbcType="CHAR"/>
+            <result property="studentId" column="student_id" jdbcType="CHAR"/>
+            <result property="studentName" column="student_name" jdbcType="VARCHAR"/>
+            <result property="phone" column="phone" jdbcType="INTEGER"/>
+            <result property="dormitoryNo" column="dormitory_no" jdbcType="VARCHAR"/>
+            <result property="buildingNo" column="building_no" jdbcType="VARCHAR"/>
+            <result property="situation" column="situation" jdbcType="VARCHAR"/>
+            <result property="situationImg" column="situation_img" jdbcType="VARCHAR"/>
+            <result property="firstProject" column="first_project" jdbcType="VARCHAR"/>
+            <result property="secondtProject" column="secondt_project" jdbcType="VARCHAR"/>
+            <result property="state" column="state" jdbcType="CHAR"/>
+            <result property="gmtCreate" column="gmt_create" jdbcType="TIMESTAMP"/>
+            <result property="gmtModified" column="gmt_modified" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,student_id,student_name,
+        phone,dormitory_no,building_no,
+        situation,situation_img,first_project,
+        secondt_project,state,gmt_create,
+        gmt_modified
+    </sql>
+    <update id="completeRepair">
+        UPDATE tb_repair SET state = 2,finish_time = #{date} where id = #{repairId}
+    </update>
+    <select id="getRepairTotal" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM tb_repair WHERE worker_id = #{workerId}
+    </select>
+    <select id="getCompleteOfRepairCount" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM tb_repair WHERE worker_id = #{workerId} AND state = 2
+    </select>
+</mapper>
